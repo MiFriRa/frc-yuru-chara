@@ -1,0 +1,275 @@
+@import "tailwindcss";
+
+:root {
+  --washi-canvas: #f7f4ea;
+  --washi-soft: #efe9d8;
+  --card-white: #ffffff;
+  --sumi-ink: #172038;
+  --sumi-muted: #4b556b;
+  --pokedex-red: #e3350d;
+  --pokedex-red-dark: #b92605;
+  --pikachu-gold: #ffcb05;
+  --pikachu-gold-deep: #d99b00;
+  --cerulean-blue: #246bce;
+  --psychic-violet: #7c3aed;
+  --matcha-green: #16a34a;
+  --amber-hybrid: #d97706;
+  --ocean-base: #e6f0f6;
+  --ocean-wave: #cfe1ec;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--washi-canvas);
+    background-image: radial-gradient(rgba(23, 32, 56, 0.055) 1px, transparent 1px);
+    background-size: 18px 18px;
+    color: var(--sumi-ink);
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: "Fredoka", system-ui, -apple-system, sans-serif;
+  }
+
+  :focus-visible {
+    outline: 2.5px solid var(--cerulean-blue);
+    outline-offset: 2px;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tactile Pokédex / TCG surfaces */
+.ink-panel {
+  background-color: var(--card-white);
+  border: 2px solid var(--sumi-ink);
+  box-shadow: 3px 3px 0 var(--sumi-ink);
+}
+
+.ink-button {
+  border: 2px solid var(--sumi-ink);
+  box-shadow: 2px 2px 0 var(--sumi-ink);
+  transition: transform 130ms ease, box-shadow 130ms ease, background-color 130ms ease, color 130ms ease;
+}
+
+.ink-button:hover:not(:disabled) {
+  transform: translate(-0.5px, -0.5px);
+  box-shadow: 3px 3px 0 var(--sumi-ink);
+}
+
+.ink-button:active:not(:disabled) {
+  transform: translate(1.5px, 1.5px);
+  box-shadow: 0.5px 0.5px 0 var(--sumi-ink);
+}
+
+.ink-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Collectible Japanese Pokémon TCG frame */
+.tcg-card {
+  position: relative;
+  background: linear-gradient(155deg, #fffdf6 0%, #ffffff 55%, #fff8dc 100%);
+  border: 2.5px solid var(--sumi-ink);
+  box-shadow: 4px 4px 0 var(--sumi-ink);
+}
+
+.tcg-gold-rim {
+  background: linear-gradient(135deg, #ffe26a 0%, #ffcb05 38%, #fff1a8 52%, #f4b400 76%, #ffe26a 100%);
+  border: 2.5px solid var(--sumi-ink);
+  box-shadow: 4px 4px 0 var(--sumi-ink);
+}
+
+.tcg-stage-holo {
+  position: relative;
+  overflow: hidden;
+}
+
+.tcg-stage-holo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    118deg,
+    transparent 24%,
+    rgba(255, 255, 255, 0.36) 44%,
+    rgba(255, 232, 130, 0.22) 52%,
+    transparent 68%
+  );
+  opacity: 0.72;
+}
+
+/* Newly infected radar pulse on Japan SVG map */
+@keyframes poke-radar-pulse {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.95;
+  }
+  75% {
+    transform: scale(2.15);
+    opacity: 0.18;
+  }
+  100% {
+    transform: scale(2.45);
+    opacity: 0;
+  }
+}
+
+.radar-pulse-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: poke-radar-pulse 1.9s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.poke-loader-spin {
+  animation: spin-slow 1.6s linear infinite;
+}
+
+/* Native accessible cross-browser <input type="range"> with synced CSS custom properties */
+.yuru-range {
+  --range-min: var(--attr-min, 0);
+  --range-max: var(--attr-max, 100);
+  --range-val: var(--control-value, 0);
+  --range-pct: clamp(
+    0%,
+    calc(((var(--range-val) - var(--range-min)) / max(1, (var(--range-max) - var(--range-min)))) * 100%),
+    100%
+  );
+  --range-fill: var(--pokedex-red);
+  --range-track: #e4e0d3;
+
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 24px;
+  background: transparent;
+  cursor: pointer;
+  margin: 0;
+}
+
+.yuru-range.yuru-range-blue {
+  --range-fill: var(--cerulean-blue);
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+.yuru-range::-webkit-slider-runnable-track {
+  height: 9px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--sumi-ink);
+  background: linear-gradient(
+    to right,
+    var(--range-fill) 0%,
+    var(--range-fill) var(--range-pct),
+    var(--range-track) var(--range-pct),
+    var(--range-track) 100%
+  );
+}
+
+.yuru-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -7px;
+  border-radius: 9999px;
+  border: 2px solid var(--sumi-ink);
+  background: radial-gradient(circle at 35% 32%, #ffffff 0%, #fff3b0 42%, var(--pikachu-gold) 100%);
+  box-shadow: 1.5px 1.5px 0 var(--sumi-ink);
+  transition: transform 120ms ease, background-color 120ms ease;
+}
+
+.yuru-range:hover::-webkit-slider-thumb {
+  transform: scale(1.1);
+}
+
+/* Firefox (separate block so WebKit never ignores it) */
+.yuru-range::-moz-range-track {
+  height: 9px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--sumi-ink);
+  background: var(--range-track);
+}
+
+.yuru-range::-moz-range-progress {
+  height: 9px;
+  border-radius: 9999px 0 0 9999px;
+  border: 1.5px solid var(--sumi-ink);
+  background: var(--range-fill);
+}
+
+.yuru-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  border: 2px solid var(--sumi-ink);
+  background: radial-gradient(circle at 35% 32%, #ffffff 0%, #fff3b0 42%, var(--pikachu-gold) 100%);
+  box-shadow: 1.5px 1.5px 0 var(--sumi-ink);
+  transition: transform 120ms ease, background-color 120ms ease;
+}
+
+.yuru-range:hover::-moz-range-thumb {
+  transform: scale(1.1);
+}
+
+/* Custom slim scrollbars for Gene Card aside */
+.yuru-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(23, 32, 56, 0.28) transparent;
+}
+
+.yuru-scroll::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.yuru-scroll::-webkit-scrollbar-thumb {
+  background: rgba(23, 32, 56, 0.26);
+  border-radius: 9999px;
+}
+
+.yuru-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Respect reduced motion across all transitions and animations */
+@media (prefers-reduced-motion: reduce) {
+  .radar-pulse-ring,
+  .poke-loader-spin {
+    animation: none !important;
+  }
+
+  .ink-button,
+  .yuru-range::-webkit-slider-thumb,
+  .yuru-range::-moz-range-thumb {
+    transition: none !important;
+  }
+
+  .tcg-stage-holo::after {
+    opacity: 0.25;
+  }
+}

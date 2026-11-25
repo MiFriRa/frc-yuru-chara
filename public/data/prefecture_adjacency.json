@@ -1,0 +1,752 @@
+{
+  "01": {
+    "jis_code": "01",
+    "name_en": "Hokkaido",
+    "name_jp": "北海道",
+    "region_en": "Hokkaido",
+    "neighbors": [
+      "02"
+    ],
+    "centroid": [
+      43.384,
+      142.572
+    ]
+  },
+  "02": {
+    "jis_code": "02",
+    "name_en": "Aomori",
+    "name_jp": "青森県",
+    "region_en": "Tohoku",
+    "neighbors": [
+      "01",
+      "03",
+      "05"
+    ],
+    "centroid": [
+      40.784,
+      140.829
+    ]
+  },
+  "03": {
+    "jis_code": "03",
+    "name_en": "Iwate",
+    "name_jp": "岩手県",
+    "region_en": "Tohoku",
+    "neighbors": [
+      "02",
+      "04",
+      "05"
+    ],
+    "centroid": [
+      39.596,
+      141.36
+    ]
+  },
+  "04": {
+    "jis_code": "04",
+    "name_en": "Miyagi",
+    "name_jp": "宮城県",
+    "region_en": "Tohoku",
+    "neighbors": [
+      "03",
+      "05",
+      "06",
+      "07"
+    ],
+    "centroid": [
+      38.45,
+      140.924
+    ]
+  },
+  "05": {
+    "jis_code": "05",
+    "name_en": "Akita",
+    "name_jp": "秋田県",
+    "region_en": "Tohoku",
+    "neighbors": [
+      "02",
+      "03",
+      "04",
+      "06"
+    ],
+    "centroid": [
+      39.753,
+      140.405
+    ]
+  },
+  "06": {
+    "jis_code": "06",
+    "name_en": "Yamagata",
+    "name_jp": "山形県",
+    "region_en": "Tohoku",
+    "neighbors": [
+      "04",
+      "05",
+      "07",
+      "15"
+    ],
+    "centroid": [
+      38.45,
+      140.1
+    ]
+  },
+  "07": {
+    "jis_code": "07",
+    "name_en": "Fukushima",
+    "name_jp": "福島県",
+    "region_en": "Tohoku",
+    "neighbors": [
+      "04",
+      "06",
+      "08",
+      "09",
+      "10",
+      "15"
+    ],
+    "centroid": [
+      37.382,
+      140.223
+    ]
+  },
+  "08": {
+    "jis_code": "08",
+    "name_en": "Ibaraki",
+    "name_jp": "茨城県",
+    "region_en": "Kanto",
+    "neighbors": [
+      "07",
+      "09",
+      "11",
+      "12"
+    ],
+    "centroid": [
+      36.31,
+      140.316
+    ]
+  },
+  "09": {
+    "jis_code": "09",
+    "name_en": "Tochigi",
+    "name_jp": "栃木県",
+    "region_en": "Kanto",
+    "neighbors": [
+      "07",
+      "08",
+      "10",
+      "11"
+    ],
+    "centroid": [
+      36.693,
+      139.816
+    ]
+  },
+  "10": {
+    "jis_code": "10",
+    "name_en": "Gunma",
+    "name_jp": "群馬県",
+    "region_en": "Kanto",
+    "neighbors": [
+      "07",
+      "09",
+      "11",
+      "15",
+      "20"
+    ],
+    "centroid": [
+      36.508,
+      138.982
+    ]
+  },
+  "11": {
+    "jis_code": "11",
+    "name_en": "Saitama",
+    "name_jp": "埼玉県",
+    "region_en": "Kanto",
+    "neighbors": [
+      "08",
+      "09",
+      "10",
+      "12",
+      "13",
+      "19",
+      "20"
+    ],
+    "centroid": [
+      36.0,
+      139.345
+    ]
+  },
+  "12": {
+    "jis_code": "12",
+    "name_en": "Chiba",
+    "name_jp": "千葉県",
+    "region_en": "Kanto",
+    "neighbors": [
+      "08",
+      "11",
+      "13",
+      "14"
+    ],
+    "centroid": [
+      35.516,
+      140.201
+    ]
+  },
+  "13": {
+    "jis_code": "13",
+    "name_en": "Tokyo",
+    "name_jp": "東京都",
+    "region_en": "Kanto",
+    "neighbors": [
+      "11",
+      "12",
+      "14",
+      "19"
+    ],
+    "centroid": [
+      35.715,
+      139.434
+    ]
+  },
+  "14": {
+    "jis_code": "14",
+    "name_en": "Kanagawa",
+    "name_jp": "神奈川県",
+    "region_en": "Kanto",
+    "neighbors": [
+      "12",
+      "13",
+      "19",
+      "22"
+    ],
+    "centroid": [
+      35.417,
+      139.335
+    ]
+  },
+  "15": {
+    "jis_code": "15",
+    "name_en": "Niigata",
+    "name_jp": "新潟県",
+    "region_en": "Chubu",
+    "neighbors": [
+      "06",
+      "07",
+      "10",
+      "16",
+      "20"
+    ],
+    "centroid": [
+      37.485,
+      138.956
+    ]
+  },
+  "16": {
+    "jis_code": "16",
+    "name_en": "Toyama",
+    "name_jp": "富山県",
+    "region_en": "Chubu",
+    "neighbors": [
+      "15",
+      "17",
+      "20",
+      "21"
+    ],
+    "centroid": [
+      36.639,
+      137.265
+    ]
+  },
+  "17": {
+    "jis_code": "17",
+    "name_en": "Ishikawa",
+    "name_jp": "石川県",
+    "region_en": "Chubu",
+    "neighbors": [
+      "16",
+      "18",
+      "21"
+    ],
+    "centroid": [
+      36.767,
+      136.768
+    ]
+  },
+  "18": {
+    "jis_code": "18",
+    "name_en": "Fukui",
+    "name_jp": "福井県",
+    "region_en": "Chubu",
+    "neighbors": [
+      "17",
+      "21",
+      "25",
+      "26"
+    ],
+    "centroid": [
+      35.85,
+      136.225
+    ]
+  },
+  "19": {
+    "jis_code": "19",
+    "name_en": "Yamanashi",
+    "name_jp": "山梨県",
+    "region_en": "Chubu",
+    "neighbors": [
+      "11",
+      "13",
+      "14",
+      "20",
+      "22"
+    ],
+    "centroid": [
+      35.616,
+      138.608
+    ]
+  },
+  "20": {
+    "jis_code": "20",
+    "name_en": "Nagano",
+    "name_jp": "長野県",
+    "region_en": "Chubu",
+    "neighbors": [
+      "10",
+      "11",
+      "15",
+      "16",
+      "19",
+      "21",
+      "22",
+      "23"
+    ],
+    "centroid": [
+      36.136,
+      138.043
+    ]
+  },
+  "21": {
+    "jis_code": "21",
+    "name_en": "Gifu",
+    "name_jp": "岐阜県",
+    "region_en": "Chubu",
+    "neighbors": [
+      "16",
+      "17",
+      "18",
+      "20",
+      "23",
+      "24",
+      "25"
+    ],
+    "centroid": [
+      35.781,
+      137.054
+    ]
+  },
+  "22": {
+    "jis_code": "22",
+    "name_en": "Shizuoka",
+    "name_jp": "静岡県",
+    "region_en": "Chubu",
+    "neighbors": [
+      "14",
+      "19",
+      "20",
+      "23"
+    ],
+    "centroid": [
+      35.02,
+      138.327
+    ]
+  },
+  "23": {
+    "jis_code": "23",
+    "name_en": "Aichi",
+    "name_jp": "愛知県",
+    "region_en": "Chubu",
+    "neighbors": [
+      "20",
+      "21",
+      "22",
+      "24"
+    ],
+    "centroid": [
+      35.038,
+      137.211
+    ]
+  },
+  "24": {
+    "jis_code": "24",
+    "name_en": "Mie",
+    "name_jp": "三重県",
+    "region_en": "Kansai",
+    "neighbors": [
+      "21",
+      "23",
+      "25",
+      "26",
+      "29",
+      "30"
+    ],
+    "centroid": [
+      34.518,
+      136.378
+    ]
+  },
+  "25": {
+    "jis_code": "25",
+    "name_en": "Shiga",
+    "name_jp": "滋賀県",
+    "region_en": "Kansai",
+    "neighbors": [
+      "18",
+      "21",
+      "24",
+      "26"
+    ],
+    "centroid": [
+      35.219,
+      136.135
+    ]
+  },
+  "26": {
+    "jis_code": "26",
+    "name_en": "Kyoto",
+    "name_jp": "京都府",
+    "region_en": "Kansai",
+    "neighbors": [
+      "18",
+      "24",
+      "25",
+      "27",
+      "28",
+      "29"
+    ],
+    "centroid": [
+      35.256,
+      135.441
+    ]
+  },
+  "27": {
+    "jis_code": "27",
+    "name_en": "Osaka",
+    "name_jp": "大阪府",
+    "region_en": "Kansai",
+    "neighbors": [
+      "26",
+      "28",
+      "29",
+      "30"
+    ],
+    "centroid": [
+      34.626,
+      135.508
+    ]
+  },
+  "28": {
+    "jis_code": "28",
+    "name_en": "Hyogo",
+    "name_jp": "兵庫県",
+    "region_en": "Kansai",
+    "neighbors": [
+      "26",
+      "27",
+      "31",
+      "33",
+      "36"
+    ],
+    "centroid": [
+      35.094,
+      134.824
+    ]
+  },
+  "29": {
+    "jis_code": "29",
+    "name_en": "Nara",
+    "name_jp": "奈良県",
+    "region_en": "Kansai",
+    "neighbors": [
+      "24",
+      "26",
+      "27",
+      "30"
+    ],
+    "centroid": [
+      34.319,
+      135.868
+    ]
+  },
+  "30": {
+    "jis_code": "30",
+    "name_en": "Wakayama",
+    "name_jp": "和歌山県",
+    "region_en": "Kansai",
+    "neighbors": [
+      "24",
+      "27",
+      "29"
+    ],
+    "centroid": [
+      33.913,
+      135.504
+    ]
+  },
+  "31": {
+    "jis_code": "31",
+    "name_en": "Tottori",
+    "name_jp": "鳥取県",
+    "region_en": "Chugoku",
+    "neighbors": [
+      "28",
+      "32",
+      "33",
+      "34"
+    ],
+    "centroid": [
+      35.363,
+      133.85
+    ]
+  },
+  "32": {
+    "jis_code": "32",
+    "name_en": "Shimane",
+    "name_jp": "島根県",
+    "region_en": "Chugoku",
+    "neighbors": [
+      "31",
+      "34",
+      "35"
+    ],
+    "centroid": [
+      35.015,
+      132.525
+    ]
+  },
+  "33": {
+    "jis_code": "33",
+    "name_en": "Okayama",
+    "name_jp": "岡山県",
+    "region_en": "Chugoku",
+    "neighbors": [
+      "28",
+      "31",
+      "34",
+      "37"
+    ],
+    "centroid": [
+      34.906,
+      133.812
+    ]
+  },
+  "34": {
+    "jis_code": "34",
+    "name_en": "Hiroshima",
+    "name_jp": "広島県",
+    "region_en": "Chugoku",
+    "neighbors": [
+      "31",
+      "32",
+      "33",
+      "35",
+      "38"
+    ],
+    "centroid": [
+      34.627,
+      132.787
+    ]
+  },
+  "35": {
+    "jis_code": "35",
+    "name_en": "Yamaguchi",
+    "name_jp": "山口県",
+    "region_en": "Chugoku",
+    "neighbors": [
+      "32",
+      "34",
+      "40"
+    ],
+    "centroid": [
+      34.211,
+      131.552
+    ]
+  },
+  "36": {
+    "jis_code": "36",
+    "name_en": "Tokushima",
+    "name_jp": "徳島県",
+    "region_en": "Shikoku",
+    "neighbors": [
+      "28",
+      "37",
+      "38",
+      "39"
+    ],
+    "centroid": [
+      33.92,
+      134.238
+    ]
+  },
+  "37": {
+    "jis_code": "37",
+    "name_en": "Kagawa",
+    "name_jp": "香川県",
+    "region_en": "Shikoku",
+    "neighbors": [
+      "33",
+      "36",
+      "38"
+    ],
+    "centroid": [
+      34.215,
+      133.973
+    ]
+  },
+  "38": {
+    "jis_code": "38",
+    "name_en": "Ehime",
+    "name_jp": "愛媛県",
+    "region_en": "Shikoku",
+    "neighbors": [
+      "34",
+      "36",
+      "37",
+      "39"
+    ],
+    "centroid": [
+      33.606,
+      132.851
+    ]
+  },
+  "39": {
+    "jis_code": "39",
+    "name_en": "Kochi",
+    "name_jp": "高知県",
+    "region_en": "Shikoku",
+    "neighbors": [
+      "36",
+      "38"
+    ],
+    "centroid": [
+      33.426,
+      133.367
+    ]
+  },
+  "40": {
+    "jis_code": "40",
+    "name_en": "Fukuoka",
+    "name_jp": "福岡県",
+    "region_en": "Kyushu",
+    "neighbors": [
+      "35",
+      "41",
+      "43",
+      "44"
+    ],
+    "centroid": [
+      33.525,
+      130.666
+    ]
+  },
+  "41": {
+    "jis_code": "41",
+    "name_en": "Saga",
+    "name_jp": "佐賀県",
+    "region_en": "Kyushu",
+    "neighbors": [
+      "40",
+      "42"
+    ],
+    "centroid": [
+      33.287,
+      130.115
+    ]
+  },
+  "42": {
+    "jis_code": "42",
+    "name_en": "Nagasaki",
+    "name_jp": "長崎県",
+    "region_en": "Kyushu",
+    "neighbors": [
+      "41"
+    ],
+    "centroid": [
+      32.947,
+      129.924
+    ]
+  },
+  "43": {
+    "jis_code": "43",
+    "name_en": "Kumamoto",
+    "name_jp": "熊本県",
+    "region_en": "Kyushu",
+    "neighbors": [
+      "40",
+      "44",
+      "45",
+      "46"
+    ],
+    "centroid": [
+      32.647,
+      130.831
+    ]
+  },
+  "44": {
+    "jis_code": "44",
+    "name_en": "Oita",
+    "name_jp": "大分県",
+    "region_en": "Kyushu",
+    "neighbors": [
+      "40",
+      "43",
+      "45"
+    ],
+    "centroid": [
+      33.203,
+      131.429
+    ]
+  },
+  "45": {
+    "jis_code": "45",
+    "name_en": "Miyazaki",
+    "name_jp": "宮崎県",
+    "region_en": "Kyushu",
+    "neighbors": [
+      "43",
+      "44",
+      "46"
+    ],
+    "centroid": [
+      32.195,
+      131.298
+    ]
+  },
+  "46": {
+    "jis_code": "46",
+    "name_en": "Kagoshima",
+    "name_jp": "鹿児島県",
+    "region_en": "Kyushu",
+    "neighbors": [
+      "43",
+      "45",
+      "47"
+    ],
+    "centroid": [
+      31.637,
+      130.63
+    ]
+  },
+  "47": {
+    "jis_code": "47",
+    "name_en": "Okinawa",
+    "name_jp": "沖縄県",
+    "region_en": "Kyushu",
+    "neighbors": [
+      "46"
+    ],
+    "centroid": [
+      26.495,
+      127.959
+    ]
+  }
+}
