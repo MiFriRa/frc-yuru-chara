@@ -1,0 +1,140 @@
+# Kravspecifikation: Yuru-Chara Trait Epidemic Explorer
+
+## 1. Formål & Afgrænsning
+
+En interaktiv webapplikation til rumlig-tidsmæssig analyse af japanske maskotter (*yuru-chara*) modelleret som en **træk-epidemi**.
+
+* **In-scope:** Spredning af visuelle og tematiske træk (stamme, hybrider, farver) over tid og geografi (præfektur- og evt. kommuneniveau), visualiseret via kort, tidslinje og "Pokémon-kort".
+* **Out-of-scope:** Popularitetsmålinger (Grand Prix-stemmer), licens-/copyright-administration og visning af ophavsretsbeskyttede fotos.
+
+---
+
+## 2. Datapipeline (Offline ETL) & Datamodel
+
+### 2.1 Datakilder
+
+1. **Geografi:** Simplificeret GeoJSON over Japans 47 præfekturer, nøglet på **JIS-kode (`01`–`47`)**, bundlet statisk i frontenden (< 200 KB).
+2. **Maskot-basisdata:** Kombiner `tacookson/data` (CSV) og Wikidata (SPARQL) på navn/præfektur.
+3. **Dato-distinktion:** Hver post skal eksplicit skelne mellem:
+* `year_type: "debut"` (bekræftet debutår fra Wikidata/Wikipedia).
+* `year_type: "first_observed"` (første registrerede år i datasæt, fx 2011).
+
+
+
+### 2.2 LLM Batch-berigelse (Maskot-"DNA")
+
+Fritekstbeskrivelser køres én gang gennem en LLM mod et strikt JSON-schema for at udtrække strukturerede gener.
+
+```json
+{
+  "id": "kumamon-43",
+  "name_en": "Kumamon",
+  "name_jp": "くまモン",
+  "jis_code": "43",
+  "prefecture_en": "Kumamoto",
+  "municipality_en": null,
+  "year": 2010,
+  "year_type": "debut",
+  "dna": {
+    "domain": "Fauna",
+    "primary_trait": "bear",
+    "secondary_traits": [],
+    "trait_family": "mammal",
+    "primary_color": "black",
+    "accent_color": "red",
+    "is_hybrid": false
+  }
+}
+
+```
+
+* **Tilladte `domain`-værdier:** `Fauna`, `Flora_Food`, `Lore_History`, `Geo_Nature`, `Object_Abstract`.
+* **`is_hybrid`:** `true` hvis `secondary_traits` er ikke-tom (fx `primary_trait: "bear"`, `secondary_traits: ["apple"]`).
+
+### 2.3 Naboskabsgraf (Pre-computed)
+
+En statisk JSON-fil (`prefecture_adjacency.json`), der mapper hver `jis_code` til:
+
+* `neighbors`: Liste over direkte tilstødende præfekturer (deler landegrænse eller fast bro/færgeforbindelse).
+* `centroid`: `[lat, lng]` til tegning af smittepile og afstandsberegning (Haversine i km).
+
+---
+
+## 3. Epidemiologisk Beregningsmodel
+
+Alle beregninger udføres klient-side i TypeScript baseret på det aktive filter (valgt `primary_trait` eller `domain`) og et konfigurerbart tidsvindue (`window_years`, default `5`).
+
+| Metrik | Formel / Logik |
+| --- | --- |
+| **Incidens** | Antal nye maskotter pr. år for valgt træk/domæne. |
+| **Mulig smittekilde (Parent)** | For en maskot $M$ i år $t$: Find den geografisk nærmeste maskot $P$ med debut i $[t - \text{window}, t - 1]$, som deler `primary_trait`, `secondary_traits` eller `trait_family`. Prioritér direkte naboer (`neighbors`). |
+| **Smitte-type** | `local` (hvis $P$ er i `neighbors`), ellers `long_distance`. |
+| **Mutationstype** | • **Ren kopi:** $M.\text{primary} == P.\text{primary}$ og `!M.is_hybrid`<br>
+
+<br>• **Hybrid:** $M$ arver $P.\text{primary}$ + tilføjer `secondary_traits`<br>
+
+<br>• **Mutation:** Samme `trait_family`, ny `primary_trait` (fx `bear` → `raccoon`). |
+| **Smitsomhed ($R_{\text{træk}}$)** | Antal efterfølgende maskotter, der har $M$ som deres beregnede `Parent` inden for `window_years`. |
+| **Generation** | `Gen 1 (Patient Zero)` hvis ingen `Parent` findes; ellers `Parent.generation + 1`. |
+
+---
+
+## 4. UI / UX Specifikation
+
+### 4.1 Overordnet Layout (Desktop-first, responsiv)
+
+1. **Topbar (Kontrolpanel):**
+* **Træk-vælger:** Dropdown/chips til at vælge `domain` eller specifik `primary_trait` (fx `bear`).
+* **Tidsvindue-slider:** Juster smittevindue (1–10 år, default 5).
+* **Datakvalitet-toggle:** `Alle data` vs. `Kun bekræftet debutår`.
+* **Visnings-toggles:** `Vis smittepile`, `Vis mutationer (stiplede pile)`.
+
+
+2. **Hovedområde (Kort – 70% bredde):**
+* Interaktivt kort over Japan (engelske præfekturnavne ved hover/zoom; intet krav om japansk).
+* **Farvelægning:** Præfekturer uden det valgte træk er neutralt grå. Aktive præfekturer farvelægges efter `Generation` eller `Mutationstype` (Ren kopi / Hybrid / Mutation).
+* **Smittepile:** Kurvede SVG/Canvas-buer fra `Parent`-centroid til `Child`-centroid.
+* Fuldt optrukket linje = Ren kopi.
+* Stiplet linje = Hybrid eller Mutation.
+
+
+* **Hover-tooltip:** Præfektur, maskotnavn, år, træk-kombination (fx `Bear + Apple`) og afstand til smittekilde.
+
+
+3. **Højre Sidepanel (Gen-kort / "Pokémon-kort" – 30% bredde):**
+* Vises ved klik på et præfektur/maskot. Fast scroll-container (ingen overlap med andre elementer).
+* **Kort-header:** Maskotnavn (EN + JP i lille tekst), `Generation`-badge, og `Domain`-ikon.
+* **Visuel midte (erstatter foto):** Stiliseret SVG-silhuet af præfekturets form farvet med maskottens `primary_color` og `accent_color` + store piktogrammer for DNA-kombinationen (fx `[Bjørn-ikon] + [Æble-ikon]`).
+* **Stats-blok:** `År` (inkl. markering af debut vs. observeret), `Smitsomhed (R-værdi)`, `Mutationstype`.
+* **Slægtstræ (Klikbar navigation):**
+* *Smittekilde:* Klikbart link til `Parent` (panorerer kortet og åbner dennes kort).
+* *Smittede værter:* Klikbar liste over `Children` med angivelse af år-forskel og mutation (fx *"+5 år · Fukuoka · Mutation: Bear → Raccoon"*).
+
+
+
+
+4. **Bundpanel (Tidslinje & Epidemikurve):**
+* **Stablet søjlediagram (Incidens):** X-akse = år, Y-akse = antal nye maskotter, farvekodet efter `Mutationstype` (Ren kopi / Hybrid / Mutation).
+* **Afspilningskontrol:** `Play / Pause`-knap, hastighed (`1x`, `2x`) og en interaktiv års-slider. Når tiden skrider frem, tænder præfekturer og smittepile synkront på kortet.
+
+
+
+---
+
+## 5. Teknisk Arkitektur
+
+* **Stack:** React + TypeScript + Vite (statisk SPA – 0 ms cold start, kan hostes gratis på Vercel/Netlify uden backend/database).
+* **Kortmotor:** `MapLibre GL JS` eller `Leaflet` (indkapslet i én isoleret komponent, der kun modtager GeoJSON, aktive præfektur-states og pil-koordinater).
+* **Grafer:** `Recharts` eller `Visx` til epidemikurven.
+* **Styling:** Tailwind CSS.
+* **ETL-script:** Separat Node.js/Python-script i `/scripts` til at køre datarens, LLM-ekstraktion og generering af `/public/data/mascots.json`.
+
+---
+
+## 6. Acceptkriterier (Definition of Done)
+
+1. **Data-integritet:** 100% af maskotter i `mascots.json` validerer mod JSON-schemaet og mapper til en gyldig `jis_code` (`01`–`47`).
+2. **Temporal afspilning:** Ved klik på `Play` afspilles epidemien fra første til sidste år ved mindst 30 fps uden layout-shifts.
+3. **Deterministisk smitteberegning:** Unit tests (Vitest) verificerer, at *Kumamoto (2010, Bear)* korrekt linkes som `Parent` med mutationstype `Mutation` til *Fukuoka (2015, Raccoon)* ved `window_years = 5`, og **ikke** linkes ved `window_years = 3`.
+4. **Nul japansk påkrævet:** Alle filtre, kortetiketter, tooltips og Gen-kort er fuldt forståelige på engelsk (eller dansk).
+5. **Ingen billedfejl:** Appen forsøger aldrig at loade eksterne maskot-billeder; alle Gen-kort genereres udelukkende fra SVG-geometri, farvekoder og ikoner.
