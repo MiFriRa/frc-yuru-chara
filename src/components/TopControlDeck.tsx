@@ -31,28 +31,6 @@ interface TopControlDeckProps {
   onChangeColorMode: (mode: MapColorMode) => void;
 }
 
-const PokeLensEmblem: React.FC = () => (
-  <svg
-    width="42"
-    height="42"
-    viewBox="0 0 48 48"
-    className="shrink-0"
-    role="img"
-    aria-label="Yuru-Dex radar emblem"
-  >
-    {/* Outer Pokédex lens housing */}
-    <circle cx="24" cy="24" r="21" fill="#E3350D" stroke="#172038" strokeWidth="2.8" />
-    <path d="M3 24 A21 21 0 0 0 45 24 Z" fill="#FFFFFF" stroke="#172038" strokeWidth="2.8" />
-    <line x1="3" y1="24" x2="45" y2="24" stroke="#172038" strokeWidth="3.2" />
-    {/* Blue glowing Pokédex scanner eye */}
-    <circle cx="24" cy="24" r="9.5" fill="#246BCE" stroke="#172038" strokeWidth="2.8" />
-    <circle cx="24" cy="24" r="5.5" fill="#60A5FA" />
-    <circle cx="21.5" cy="21.5" r="2.2" fill="#FFFFFF" />
-    {/* Top specular glint */}
-    <path d="M12 12 Q17 7 24 8" fill="none" stroke="#FFFFFF" strokeWidth="2.4" strokeLinecap="round" opacity="0.7" />
-  </svg>
-);
-
 export const TopControlDeck: React.FC<TopControlDeckProps> = ({
   presets,
   activePresetId,
@@ -81,18 +59,32 @@ export const TopControlDeck: React.FC<TopControlDeckProps> = ({
         {/* Row 1: Brand Identity + Story Presets */}
         <div className="flex flex-wrap items-center justify-between gap-2.5">
           <div className="flex items-center gap-2.5">
-            <PokeLensEmblem />
+            <a
+              href="https://frimer-rasmussen.dk"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Frimer-Rasmussen Consulting"
+              className="group inline-flex items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-[#172038] focus-visible:outline-offset-2"
+            >
+              <img
+                src="./frc-logo.png"
+                alt="Frimer-Rasmussen Consulting"
+                className="w-10 h-10 object-contain shrink-0 transition-transform duration-150 group-hover:scale-105"
+              />
+            </a>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
                 <h1 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-[#172038] leading-none">
                   Yuru-Dex
                 </h1>
-                {/* Classic Pokédex 3-dot status lights */}
-                <div className="hidden sm:flex items-center gap-1" aria-hidden="true">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#E3350D] border border-[#172038]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFCB05] border border-[#172038]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#16A34A] border border-[#172038]" />
-                </div>
+                <a
+                  href="https://frimer-rasmussen.dk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-semibold text-[#3D6B14] hover:text-[#172038] hover:underline underline-offset-2 transition-[color] duration-150"
+                >
+                  by Frimer-Rasmussen Consulting
+                </a>
               </div>
               <p className="text-xs font-medium text-[#4B556B] mt-0.5 leading-tight">
                 Japan Mascot Outbreak Atlas
