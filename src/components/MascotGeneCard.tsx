@@ -62,7 +62,7 @@ export const MascotGeneCard: React.FC<MascotGeneCardProps> = ({
     return (
       <aside
         aria-label="Mascot Gene Card"
-        className="w-full lg:w-[348px] xl:w-[388px] shrink-0 rounded-2xl ink-panel p-4 flex flex-col justify-between overflow-y-auto yuru-scroll"
+        className="w-full shrink-0 rounded-2xl ink-panel p-4 flex flex-col justify-between overflow-y-auto yuru-scroll"
       >
         <div className="space-y-4">
           <div className="flex items-center justify-between">
@@ -126,7 +126,7 @@ export const MascotGeneCard: React.FC<MascotGeneCardProps> = ({
   return (
     <aside
       aria-label="Mascot Gene Card"
-      className="w-full lg:w-[348px] xl:w-[388px] shrink-0 flex flex-col min-h-0 overflow-y-auto yuru-scroll pr-0.5"
+      className="w-full shrink-0 flex flex-col min-h-0 overflow-y-auto yuru-scroll pr-0.5"
     >
       {/* Multi-mascot prefecture selector strip with count & soft right-edge fade mask */}
       {prefectureNodes.length > 1 && (

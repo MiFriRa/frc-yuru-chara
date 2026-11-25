@@ -100,7 +100,7 @@ export const EpidemicTimeline: React.FC<EpidemicTimelineProps> = ({
   return (
     <footer
       aria-label="Epidemic playback timeline and incidence curve"
-      className="bg-white border-t-2 border-[#172038] shadow-[0_-3px_0_rgba(23,32,56,0.08)] shrink-0 z-10"
+      className="bg-white border-y-2 lg:border-b-0 border-[#172038] shadow-[0_-3px_0_rgba(23,32,56,0.08)] shrink-0 z-10"
     >
       <div className="max-w-[1680px] mx-auto px-3 sm:px-4 py-2.5 flex flex-col gap-2">
         {/* Top Row: Playback Controls + Big Year Readout + Live Outbreak Counters */}

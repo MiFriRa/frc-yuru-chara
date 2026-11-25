@@ -428,49 +428,55 @@ export function App() {
         onChangeColorMode={setColorMode}
       />
 
-      {/* Main Split Workspace: ~70% Map / ~30% Collectible Gene Card */}
-      <main className="flex-1 min-h-0 max-w-[1680px] w-full mx-auto px-3 sm:px-4 py-2.5 flex flex-col lg:flex-row gap-3">
-        <JapanEpidemicMap
-          geojson={atlasData.geojson}
-          prefectureSummary={epidemic.prefectureSummary}
-          arcs={epidemic.arcs}
-          selectedJisCode={selectedJisCode}
-          selectedMascotId={selectedNode?.mascot.id ?? null}
-          colorMode={colorMode}
-          showArcs={showArcs}
-          showMutations={showMutations}
-          currentYear={currentYear}
-          focusNonce={focusNonce}
-          onSelectPrefecture={handleSelectPrefecture}
-          onSelectMascot={handleSelectMascot}
-        />
+      {/* Responsive Workspace: Mobile = Map -> Timeline -> Gene Card; Desktop (lg+) = [Map | Gene Card] -> Timeline */}
+      <div className="flex-1 min-h-0 flex flex-col lg:grid lg:grid-cols-[minmax(0,1fr)_364px] xl:grid-cols-[minmax(0,1fr)_404px] lg:grid-rows-[minmax(0,1fr)_auto]">
+        <main className="order-1 lg:order-none lg:col-start-1 lg:row-start-1 min-h-0 flex px-3 sm:px-4 pt-2.5 pb-2 lg:py-2.5 lg:pr-1.5">
+          <JapanEpidemicMap
+            geojson={atlasData.geojson}
+            prefectureSummary={epidemic.prefectureSummary}
+            arcs={epidemic.arcs}
+            selectedJisCode={selectedJisCode}
+            selectedMascotId={selectedNode?.mascot.id ?? null}
+            colorMode={colorMode}
+            showArcs={showArcs}
+            showMutations={showMutations}
+            currentYear={currentYear}
+            focusNonce={focusNonce}
+            onSelectPrefecture={handleSelectPrefecture}
+            onSelectMascot={handleSelectMascot}
+          />
+        </main>
 
-        <MascotGeneCard
-          selectedNode={selectedNode}
-          prefectureNodes={prefectureNodes}
-          nodesById={epidemic.nodesById}
-          geojson={atlasData.geojson}
-          selectedJisCode={selectedJisCode}
-          currentYear={currentYear}
-          windowYears={windowYears}
-          superSpreaderNode={superSpreaderNode}
-          onSelectMascot={handleSelectMascot}
-        />
-      </main>
+        <div className="order-2 lg:order-none lg:col-span-2 lg:row-start-2">
+          <EpidemicTimeline
+            yearlyIncidence={epidemic.yearlyIncidence}
+            minYear={epidemic.minYear}
+            maxYear={epidemic.maxYear}
+            currentYear={currentYear}
+            onChangeYear={handleScrubYear}
+            isPlaying={isPlaying}
+            onTogglePlay={handleTogglePlay}
+            speed={speed}
+            onChangeSpeed={setSpeed}
+            onReset={handleResetTimeline}
+            stats={epidemic.stats}
+          />
+        </div>
 
-      <EpidemicTimeline
-        yearlyIncidence={epidemic.yearlyIncidence}
-        minYear={epidemic.minYear}
-        maxYear={epidemic.maxYear}
-        currentYear={currentYear}
-        onChangeYear={handleScrubYear}
-        isPlaying={isPlaying}
-        onTogglePlay={handleTogglePlay}
-        speed={speed}
-        onChangeSpeed={setSpeed}
-        onReset={handleResetTimeline}
-        stats={epidemic.stats}
-      />
+        <div className="order-3 lg:order-none lg:col-start-2 lg:row-start-1 min-h-0 flex px-3 sm:px-4 py-2.5 lg:pl-1.5">
+          <MascotGeneCard
+            selectedNode={selectedNode}
+            prefectureNodes={prefectureNodes}
+            nodesById={epidemic.nodesById}
+            geojson={atlasData.geojson}
+            selectedJisCode={selectedJisCode}
+            currentYear={currentYear}
+            windowYears={windowYears}
+            superSpreaderNode={superSpreaderNode}
+            onSelectMascot={handleSelectMascot}
+          />
+        </div>
+      </div>
     </div>
   );
 }
